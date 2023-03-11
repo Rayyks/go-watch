@@ -2,7 +2,7 @@ import React from "react";
 import Filter from "./Filter";
 import Search from "./Search";
 import Header from "./Header";
-import MovieList from "./MovieList";
+import MoviesList from "./MoviesList";
 
 const Container = () => {
   return (
@@ -10,7 +10,7 @@ const Container = () => {
       <Search />
       <Filter />
       <Header />
-      <MovieList />
+      <MoviesList />
     </div>
   );
 };

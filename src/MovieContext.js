@@ -3,35 +3,40 @@ import { useLocalStorage } from "./useLocalStorage";
 
 const MovieContext = createContext();
 
-const MovieProvider = ({ children }) => {
+export function MovieProvider({ children }) {
   const [movies, setMovies] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [activeGenre, setActiveGenre] = useState(0);
   const [header, setHeader] = useState("Trending");
 
-  //   LocalStorage State
-  const [favorites, setFavorites] = useState("fav", []);
+  // localstorage state
+  const [favourites, setFavourites] = useLocalStorage("fav", []);
 
   const fetchPopular = async () => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/movie/popular?api_key=a76d97f1e11afaeab6339a4234ebb8d0&language=en-US&page=1"
+      "https://api.themoviedb.org/3/movie/popular?api_key=b454aa11fb4b5fc5b515d2e80a898a1c&language=en-US&page=1"
     );
     const movies = await data.json();
-    setMovies(movies.result);
-    setFiltered(movies.result);
+    setMovies(movies.results);
+    setFiltered(movies.results);
     setHeader("Trending");
     setActiveGenre(0);
   };
 
   const fetchSearch = async (query) => {
     const data = await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=a76d97f1e11afaeab6339a4234ebb8d0&language=en-US&query=${query}&page=1&include_adult=false`
+      `https://api.themoviedb.org/3/search/movie?api_key=b454aa11fb4b5fc5b515d2e80a898a1c&language=en-US&query=${query}&page=1&include_adult=false`
     );
+    const movies = await data.json();
+    setMovies(movies.results);
+    setFiltered(movies.results);
+    setHeader(`Results for "${query}"`);
+    setActiveGenre(0);
   };
 
   const fetchNowPlaying = async () => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/movie/now_playing?api_key=a76d97f1e11afaeab6339a4234ebb8d0&language=en-US&page=1"
+      "https://api.themoviedb.org/3/movie/now_playing?api_key=b454aa11fb4b5fc5b515d2e80a898a1c&language=en-US&page=1"
     );
     const movies = await data.json();
     setMovies(movies.results);
@@ -42,7 +47,7 @@ const MovieProvider = ({ children }) => {
 
   const fetchTopRated = async () => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/movie/top_rated?api_key=a76d97f1e11afaeab6339a4234ebb8d0&language=en-US&page=1"
+      "https://api.themoviedb.org/3/movie/top_rated?api_key=b454aa11fb4b5fc5b515d2e80a898a1c&language=en-US&page=1"
     );
     const movies = await data.json();
     setMovies(movies.results);
@@ -53,7 +58,7 @@ const MovieProvider = ({ children }) => {
 
   const fetchUncoming = async () => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/movie/upcoming?api_key=a76d97f1e11afaeab6339a4234ebb8d0&language=en-US&page=1"
+      "https://api.themoviedb.org/3/movie/upcoming?api_key=b454aa11fb4b5fc5b515d2e80a898a1c&language=en-US&page=1"
     );
     const movies = await data.json();
     setMovies(movies.results);
@@ -62,30 +67,30 @@ const MovieProvider = ({ children }) => {
     setActiveGenre(0);
   };
 
-  const addToFavorites = (movie) => {
+  const addToFavourites = (movie) => {
     let isOnArray = false;
-    favorites.map((fav) => {
+    favourites.map((fav) => {
       if (fav.id === movie.id) {
         isOnArray = true;
       }
     });
 
     if (isOnArray) {
-      setFavorites(favorites.filter((fav) => fav.id !== movie.id));
+      setFavourites(favourites.filter((fav) => fav.id !== movie.id));
     } else {
-      setFavorites((prevState) => [...prevState, movie]);
+      setFavourites((prevState) => [...prevState, movie]);
     }
   };
 
   const getFavourites = () => {
-    setMovies(favorites);
-    setFiltered(favorites);
+    setMovies(favourites);
+    setFiltered(favourites);
     setHeader("Your favourites");
     setActiveGenre(0);
   };
 
   const isFav = (id) => {
-    let fav = favorites.filter((fav) => fav.id === id);
+    let fav = favourites.filter((fav) => fav.id === id);
     return fav.length === 0 ? true : false;
   };
 
@@ -94,7 +99,7 @@ const MovieProvider = ({ children }) => {
       value={{
         header,
         setHeader,
-        addToFavorites,
+        addToFavourites,
         filtered,
         setFiltered,
         fetchPopular,
@@ -113,6 +118,6 @@ const MovieProvider = ({ children }) => {
       {children}
     </MovieContext.Provider>
   );
-};
+}
 
 export default MovieContext;
