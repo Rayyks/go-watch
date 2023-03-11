@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 // Components Import
-import MovieProvider from "./Movie";
+import MovieContext from "./MovieContex";
 import Panel from "./components/Panel";
 import Container from "./components/Container";
 import Details from "./components/Details";
@@ -10,7 +10,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <MovieProvider>
+      <MovieContext>
         <Routes>
           <Route
             path="/"
@@ -25,7 +25,7 @@ function App() {
             <Route path=":movieId" element={<Details />} />
           </Route>
         </Routes>
-      </MovieProvider>
+      </MovieContext>
     </div>
   );
 }

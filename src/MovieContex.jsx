@@ -115,4 +115,4 @@ const MovieProvider = ({ children }) => {
   );
 };
 
-export default MovieProvider;
+export default MovieContext;
