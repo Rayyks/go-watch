@@ -1,9 +1,12 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+// Components Import
 import { MovieProvider } from "./MovieContext";
 import Panel from "./components/Panel";
 import Container from "./components/Container";
 import Details from "./components/Details";
+
+// Loader Import
 
 function App() {
   return (
