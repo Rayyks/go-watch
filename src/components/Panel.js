@@ -41,7 +41,7 @@ const Panel = () => {
 
         <BiCameraMovie
           onClick={() => fetchUncoming()}
-          className={header === "Uncoming" ? "active" : null}
+          className={header === "Upcoming" ? "active" : null}
         />
       </div>
       <div>

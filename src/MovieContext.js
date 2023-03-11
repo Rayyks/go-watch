@@ -63,7 +63,7 @@ export function MovieProvider({ children }) {
     const movies = await data.json();
     setMovies(movies.results);
     setFiltered(movies.results);
-    setHeader("Uncoming");
+    setHeader("Upcoming");
     setActiveGenre(0);
   };
 
