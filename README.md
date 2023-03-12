@@ -9,7 +9,7 @@ Smooth filtering of the movie category is possible thanks to framer motion libra
 
 ## Live site
 
-[MOVIE-APP](https://movie-app-ttargonski.netlify.app/)
+[MOVIE-APP](https://movie-rayyks.vercel.app/)
 
 ## Technologies
 
