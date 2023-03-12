@@ -83,7 +83,7 @@ const Details = () => {
             <p>{movie.release_date}</p>
           </div>
           <div>
-            <a href={movie.thrailer}>
+            <a href={movie.homepage}>
               <span> Film page </span>
               <FiExternalLink />
             </a>
